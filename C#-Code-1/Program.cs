@@ -76,6 +76,25 @@ namespace HelloWorld
             Console.WriteLine("FLT: PT + bigNum = {0}", fltPiVal + fltBigNum);
 
 
+            // Data Type Conversion
+            // You can convert from string to other types with Parse
+            bool boolFromStr = bool.Parse("True");
+            int intFromStr = int.Parse("100");
+            double dblFromStr = double.Parse("1.234");
+
+            // Convert double into a string
+            string strVal = dblFromStr.ToString();
+
+            // Get the new data type
+            Console.WriteLine($"Data type: {strVal.GetType()}");
+
+            // Cast integer into long (Implicit Conversion)
+            // smaller size type to a larger size
+            int intNum = 10;
+            long longNum = intNum;
+
+
+
 
 
 
