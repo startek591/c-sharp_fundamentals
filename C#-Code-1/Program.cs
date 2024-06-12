@@ -15,6 +15,17 @@ namespace HelloWorld
                 Console.WriteLine("{0} : {1} ", mess, k);
             }
         }
+
+        static double DoDivision(double x, double y)
+        {
+            if (y == 0)
+            {
+                // We are throwing an exception because
+                // you can't divide by zero
+                throw new System.DivideByZeroException();
+            }
+            return x / y;
+        }
         // Execution begins with the main function
         // static means this function can run without
         // creating an object
@@ -386,6 +397,44 @@ namespace HelloWorld
             } while (secretNumber != numberGuessed);
 
             Console.WriteLine("You guessed it was {0}", secretNumber);
+
+            // Exception Hanlding
+            // We use exception handling to catch errors
+            // that could crash our program
+            double num1 = 5;
+            double num2 = 0;
+
+            // Code that could cause an error is surrounded
+            // by a try block
+            try
+            {
+                Console.WriteLine("5 / 0 = {0}", DoDivision(num1, num2));
+            }
+
+            // We catch the error and warn the user
+            // rather then crash the program
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("You can't Divide by Zero");
+
+                // Get additional info on the exception
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+            }
+
+            // This is the default catch all for exceptions
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred");
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+            }
+
+            // finally always runns and provides for clean up
+            finally
+            {
+                Console.WriteLine("Cleaning Up");
+            }
         }
     }
 
