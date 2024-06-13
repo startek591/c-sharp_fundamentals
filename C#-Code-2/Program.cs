@@ -16,6 +16,17 @@ namespace ConsoleApp2
             rect1.width = 50;
             Console.WriteLine("Area of rect1: {0}", rect1.Area());
 
+            // Use a constructor to create a Rectangle
+            Rectangle rect2 = new Rectangle(100, 40);
+
+            // If you assign one Reactangle to another
+            // you are setting the values and not
+            // creating a reference
+            rect2 = rect1;
+            rect1.length = 33;
+
+            Console.WriteLine("rect2.length: {0}", rect2.length);
+
         }
 
         // Structs
