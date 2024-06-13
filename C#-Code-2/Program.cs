@@ -27,6 +27,28 @@ namespace ConsoleApp2
 
             Console.WriteLine("rect2.length: {0}", rect2.length);
 
+            // Object Oriented programming
+            // A class models real world objects by
+            // definining their attributes (fields) and 
+            // capabilities (methods)
+            // Then unlike with structs you can
+            // inherit from a class and create more
+            // specific subclass types
+
+            // Add a class Project -> Add Class
+
+            // Create an Animal object
+            // You could also assign values like
+            // fox.name = "Red"
+            Animal fox = new Animal()
+            {
+                name = "Read",
+                sound = "Raaaw"
+            };
+
+            // Call the static method
+            Console.WriteLine("# of Animals {0}", Animal.GetNumAnimals());
+
         }
 
         // Structs
