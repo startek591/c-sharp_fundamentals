@@ -20,6 +20,17 @@ namespace ConsoleApp3
 
             Console.WriteLine("This cat is named {0} and says {1}", cat.GetName(), cat.Sound);
 
+            // Test auto generated getters and setters
+            cat.Owner = "Derek";
+
+            Console.WriteLine("{0} owner is {1}", cat.GetName(), cat.Owner);
+
+            // Get the read-only id number
+            Console.WriteLine("{0} shelter id is {1}", cat.GetName(), cat.idNum);
+
+            // Test static property
+            Console.WriteLine("# of Animals: {0}", Animal.NumOfAnimals);
+
             Console.ReadLine();
 
         }

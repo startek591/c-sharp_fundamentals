@@ -103,9 +103,14 @@ namespace ConsoleApp3
             }
         }
 
-        public static int numOfAnimals = 0;
+        // You can have the getters and setters
+        // generated for you like the and also
+        // set the default value
+        public string Owner { get; set; } = "No Owner";
 
         // You can also define static properties
+        public static int numOfAnimals = 0;
+
         public static int NumOfAnimals
         {
             get { return numOfAnimals; }
