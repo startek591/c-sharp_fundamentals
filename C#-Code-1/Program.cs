@@ -1,4 +1,6 @@
 ﻿
+using System.Text;
+using System.Globalization;
 
 namespace HelloWorld
 {
@@ -23,6 +25,7 @@ namespace HelloWorld
             }
             return x / y;
         }
+
         // Execution begin with the main functions
         // static means this function can run without
         // creating an object
@@ -453,6 +456,55 @@ namespace HelloWorld
                 Console.WriteLine("Cleaning Up");
             }
 
+            // StringBuilder
+            // Each time you change a string you are actually
+            // creating a new string which is inefficient
+            // when you are working with large blocks of text 
+            // StringBuilders actually change the text
+            // rather then make a copy
+
+            // Create a StringBuilder with a default size
+            // of 16 characters, but it grows automatically
+            StringBuilder sb = new StringBuilder("Random Text");
+
+            // Create a StringBuilder with a size 0f 256
+            StringBuilder sb2 = new StringBuilder("More Stuff that is very important", 256);
+
+            // Get max size
+            Console.WriteLine("Capacity : {0}", sb2.Capacity);
+
+            // Get length
+            Console.WriteLine("Length : {0}", sb2.Length);
+
+            // Add text to StringBuilder
+            sb2.AppendLine("\nMore important text");
+
+            // Define culture specific formating
+            CultureInfo enUS = CultureInfo.CreateSpecificCulture("en-US");
+
+            // Append a format string
+            string bestCust = "Bob Smith";
+            sb2.AppendFormat(enUS, "Best Customer : {0}", bestCust);
+
+            // Output StringBuilder
+            Console.WriteLine(sb2.ToString());
+
+            // Replace a string
+            sb2.Replace("text", "characters");
+            Console.WriteLine(sb2.ToString());
+
+            // Clear a string builder
+            sb2.Clear();
+
+            sb2.Append("Random Text");
+
+            // Are objects equal
+            Console.WriteLine(sb.Equals(sb2));
+
+            // Insert an at index
+            sb2.Insert(11, " that's Great");
+
+            Console.WriteLine("Remove : {0}", sb2.ToString());
         }
     }
 }
