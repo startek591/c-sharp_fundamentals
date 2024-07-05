@@ -22,6 +22,27 @@
             rect1.length = 33;
             Console.WriteLine("rect2.length : {0}", rect2.length);
 
+            // Object Oriented Programming
+            // A class models real world objects by
+            // defining their attributes (fields) and 
+            // capabilities (methods)
+            // Then unlike with structs you can
+            // inherit from a class and create more
+            // speciifc subclass types
+
+            // Add a class Project -> Add Class
+
+            // Create an Animal object
+            // You could also assign values like
+            // fox.name = "Red"
+            Animal fox = new Animal()
+            {
+                name = "Red",
+                sound = "Raaaw"
+            };
+
+            // Call the static method
+            Console.WriteLine("# of Animals {0}", Animal.GetNumAnimals());
         }
 
         // Structs 
