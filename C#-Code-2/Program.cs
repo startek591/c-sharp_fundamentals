@@ -43,6 +43,10 @@
 
             // Call the static method
             Console.WriteLine("# of Animals {0}", Animal.GetNumAnimals());
+
+            // You can also create static utility
+            // classes Project -> Add Class
+            Console.WriteLine("Area of Rectangle : {0}", ShapeMath.GetArea("Rectangle", 5, 6));
         }
 
         // Structs 
