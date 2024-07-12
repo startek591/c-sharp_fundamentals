@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive.Subjects;
 
 namespace RxSamples
 {
@@ -13,12 +14,18 @@ namespace RxSamples
     {
         public Program()
         {
-            var market = new Market();
+            var market = new Subject<float>();
             market.Subscribe(this);
+
+            market.OnNext(1.24f);
+            market.OnError(new Exception("opps"));
+            // market.OnCompleted();
         }
         static void Main(string[] args)
         {
             // OnNext* --> (OnError | OnCompleted)?
+
+            new Program();
         }
 
         public void OnNext(float value)
@@ -28,12 +35,12 @@ namespace RxSamples
 
         public void OnError(Exception error)
         {
-
+            Console.WriteLine($"We got an error {error.Message}");
         }
 
         public void OnCompleted()
         {
-
+            Console.WriteLine("Sequence is complete");
         }
     }
 }
