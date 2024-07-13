@@ -3,18 +3,22 @@ using System.Reactive.Subjects;
 
 namespace RxSamples
 {
+    public class Scada
+    {
+        private BehaviorSubject<double> sensorValue;
+        public IObservable<double> SensorValue => sensorValue;
+    }
     class Program
     {
         static void Main(string[] args)
         {
-            var timeWindow = TimeSpan.FromMilliseconds(500);
-            var market = new ReplaySubject<float>(timeWindow);
+            var sensorReading = new BehaviorSubject<double>(-1.0);
 
-            market.OnNext(123);
-            market.OnNext(234);
-            market.OnNext(456);
+            sensorReading.Inspect("sensor");
 
-            market.Subscribe(x => Console.WriteLine($"Got the price {x}"));
+            sensorReading.OnNext(0.99);
+
+            sensorReading.OnCompleted();
         }
     }
 }
