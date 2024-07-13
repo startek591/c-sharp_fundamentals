@@ -7,9 +7,13 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var market = new ReplaySubject<float>();
+            var timeWindow = TimeSpan.FromMilliseconds(500);
+            var market = new ReplaySubject<float>(timeWindow);
 
             market.OnNext(123);
+            market.OnNext(234);
+            market.OnNext(456);
+
             market.Subscribe(x => Console.WriteLine($"Got the price {x}"));
         }
     }
