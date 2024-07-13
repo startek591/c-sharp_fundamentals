@@ -7,17 +7,18 @@ namespace RxSamples
     {
         static void Main()
         {
-            var numbers = new[] { 1, 2, 0, 4, 5 };
+            var source1 = Observable.Interval(TimeSpan.FromSeconds(1)).Take(3);
+            var source2 = Observable.Interval(TimeSpan.FromSeconds(0.5)).Take(4);
 
-            var query = numbers.ToObservable()
-                .Select(x => 10 / x)
-                .OnErrorResumeNext(Observable.Return(-1)); // Fallback to -1 on error
+            var merged = source1.Merge(source2);
 
-            query.Subscribe(
-                result => Console.WriteLine($"Result: {result}"),
-                ex => Console.WriteLine($"Sequence faulted: {ex.Message}"),
-                () => Console.WriteLine("Sequence completed")
+            merged.Subscribe(
+                value => Console.WriteLine($"Merged value: {value}"),
+                () => Console.WriteLine("Merged completed")
             );
+
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
         }
     }
 }
