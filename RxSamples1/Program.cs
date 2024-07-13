@@ -7,11 +7,12 @@ namespace RxSamples
     {
         static void Main()
         {
-            var numbers = Observable.Range(1, 5);
+            var numbers1 = Observable.Range(1, 3);
+            var numbers2 = Observable.Range(4, 3);
 
-            numbers
-            .Where(x => x % 2 == 0) // Filter even numbers
-            .Subscribe(x => Console.WriteLine($"Even Number: {x}"));
+            numbers1
+                .Zip(numbers2, (x, y) => $"Combined: {x} + {y} = {x + y}") // Combine with addition
+                .Subscribe(result => Console.WriteLine(result));
         }
     }
 }
