@@ -7,11 +7,12 @@ namespace RxSamples
     {
         static void Main()
         {
-            var interval = Observable.Interval(TimeSpan.FromSeconds(1));
-            var filteredInterval = interval.Where(i => i % 2 == 0);
+            var numbers = new[] { 1, 2, 2, 3, 4, 4, 5 };
+            var observableNumbers = numbers.ToObservable();
+            var distinctNumbers = observableNumbers.Distinct();
 
-            filteredInterval.Subscribe(
-                onNext: i => Console.WriteLine($"Even interval: {i}"),
+            distinctNumbers.Subscribe(
+                onNext: n => Console.WriteLine($"Distinct number: {n}"),
                 onCompleted: () => Console.WriteLine("Sequence completed.")
             );
 
