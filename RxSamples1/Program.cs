@@ -1,26 +1,43 @@
 ﻿using System;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
+using System.Reactive.Subjects;
+
+public class EventBroker
+{
+    private readonly Subject<string> eventStream = new Subject<string>();
+
+    public IObservable<string> Events => eventStream;
+
+    public void Publish(string eventData)
+    {
+        eventStream.OnNext(eventData);
+    }
+}
+
+public class EventConsumer
+{
+    public EventConsumer(EventBroker eventBroker)
+    {
+        eventBroker.Events.Subscribe(data =>
+        {
+            Console.WriteLine($"Event received: {data}");
+        });
+    }
+}
 
 namespace RxSamples
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static void Main()
         {
-            // Create an observable that emits values every 500 milliseconds
-            var source = Observable.Interval(TimeSpan.FromMilliseconds(500));
+            var broker = new EventBroker();
+            var consumer = new EventConsumer(broker);
 
-            // Timeout each emission if no new value is emitted within 1 second
-            var timedOut = source.Timeout(TimeSpan.FromSeconds(1));
+            broker.Publish("Event 1");
+            broker.Publish("Event 2");
+            broker.Publish("Event 3");
 
-            // Subscribe to the timed out observable
-            timedOut.Subscribe(
-                value => Console.WriteLine($"Timed out value: {value}"),
-                ex => Console.WriteLine($"Timeout Error: {ex.Message}"),
-                () => Console.WriteLine("Completed"));
-
-            await Task.Delay(TimeSpan.FromSeconds(10)); //  Keep the program running
+            Console.ReadLine();
         }
     }
 }
