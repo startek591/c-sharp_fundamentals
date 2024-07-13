@@ -9,7 +9,7 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var obs = Observable.Empty<int>(); // ReplaySubject
+            var obs = Observable.Never<int>(); // ReplaySubject
             obs.Inspect("obs");
         }
     }
