@@ -7,12 +7,14 @@ namespace RxSamples
     {
         static void Main()
         {
-            var numbers = new[] { 1, 2, 2, 3, 4, 4, 5 };
-            var observableNumbers = numbers.ToObservable();
-            var distinctNumbers = observableNumbers.Distinct();
+            var random = new Random();
+            var source = Observable.Interval(TimeSpan.FromMilliseconds(5))
+                .Select(_ => random.Next(0, 5));
 
-            distinctNumbers.Subscribe(
-                onNext: n => Console.WriteLine($"Distinct number: {n}"),
+            var debounced = source.Throttle(TimeSpan.FromSeconds(1));
+
+            debounced.Subscribe(
+                onNext: value => Console.WriteLine($"Debounced value: {value}"),
                 onCompleted: () => Console.WriteLine("Sequence completed.")
             );
 
