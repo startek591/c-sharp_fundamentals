@@ -9,10 +9,10 @@ namespace RxSamples
         {
             var numbers = Observable.Range(1, 5);
 
-            // Count the elements in the sequence
-            numbers.Count().Subscribe(count =>
+            // Check if any element satisfies the condition
+            numbers.Any(x => x > 3).Subscribe(hasElement =>
             {
-                Console.WriteLine($"Number of elements: {count}");
+                Console.WriteLine($"Any element greater than 3: {hasElement}");
             });
         }
     }
