@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Reactive.Threading.Tasks;
-using System.Threading.Tasks;
+using System.Reactive.Linq;
 
 namespace RxSamples
 {
     class Program
     {
-        static async Task Main()
+        static void Main()
         {
-            var task = Task.Run(() => 42);
-            var taskObservable = task.ToObservable();
+            var numbers = Observable.Range(1, 10);
+            var oddNumbers = numbers.Where(n => n % 2 != 0);
 
-            taskObservable.Subscribe(
-                value => Console.WriteLine($"Received value: {value}"),
-                ex => Console.WriteLine($"Error: {ex.Message}"),
-                () => Console.WriteLine("Completed")
+            oddNumbers.Subscribe(
+                onNext: n => Console.WriteLine($"Odd number: {n}"),
+                onCompleted: () => Console.WriteLine("Sequence completed.")
             );
 
-            await task; // Wait for task completion to keep the console open
+            Console.ReadLine();
         }
     }
 }
