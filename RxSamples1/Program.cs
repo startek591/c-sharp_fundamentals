@@ -7,18 +7,13 @@ namespace RxSamples
     {
         static void Main()
         {
-            var random = new Random();
-            var source = Observable.Interval(TimeSpan.FromMilliseconds(5))
-                .Select(_ => random.Next(0, 5));
+            var numbers = Observable.Range(1, 5);
 
-            var debounced = source.Throttle(TimeSpan.FromSeconds(1));
-
-            debounced.Subscribe(
-                onNext: value => Console.WriteLine($"Debounced value: {value}"),
-                onCompleted: () => Console.WriteLine("Sequence completed.")
-            );
-
-            Console.ReadLine();
+            // Count the elements in the sequence
+            numbers.Count().Subscribe(count =>
+            {
+                Console.WriteLine($"Number of elements: {count}");
+            });
         }
     }
 }
