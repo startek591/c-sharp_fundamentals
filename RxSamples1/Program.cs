@@ -9,10 +9,10 @@ namespace RxSamples
         {
             var numbers = Observable.Range(1, 5);
 
-            // Check if any element satisfies the condition
-            numbers.Any(x => x > 3).Subscribe(hasElement =>
+            // Get the first element in the sequence
+            numbers.FirstAsync().Subscribe(first =>
             {
-                Console.WriteLine($"Any element greater than 3: {hasElement}");
+                Console.WriteLine($"First element: {first}");
             });
         }
     }
