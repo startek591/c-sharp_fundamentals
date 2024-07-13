@@ -1,8 +1,6 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Linq;
-
-using System.Timers;
-
 
 namespace RxSamples
 {
@@ -10,14 +8,30 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var numbers = new List<int> { 1, 2, 3, 4, 5 };
-            var numbersObservable = numbers.ToObservable();
+            var button = new Button();
+            var clickObservable = Observable.FromEventPattern<EventHandler, EventArgs>(
+             handler => button.Click += handler,
+             handler => button.Click -= handler
+            );
 
-            numbersObservable.Subscribe(
-                number => Console.WriteLine($"Recieved value: {number}"),
+            clickObservable.Subscribe(
+                evt => Console.WriteLine("Button clicked"),
                 ex => Console.WriteLine($"Error: {ex.Message}"),
                 () => Console.WriteLine("Completed")
             );
+
+            // Simulate button click
+            button.OnClick();
+        }
+    }
+
+    class Button
+    {
+        public event EventHandler Click;
+
+        public void OnClick()
+        {
+            Click?.Invoke(this, EventArgs.Empty);
         }
     }
 }
