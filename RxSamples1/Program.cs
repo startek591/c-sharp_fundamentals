@@ -7,11 +7,12 @@ namespace RxSamples
     {
         static void Main()
         {
-            var numbers = Observable.Range(1, 10);
-            var oddNumbers = numbers.Where(n => n % 2 != 0);
+            var words = new[] { "apple", "banana", "cherry", "date", "fig", "grape" };
+            var observableWords = words.ToObservable();
+            var longWords = observableWords.Where(word => word.Length > 4);
 
-            oddNumbers.Subscribe(
-                onNext: n => Console.WriteLine($"Odd number: {n}"),
+            longWords.Subscribe(
+                onNext: word => Console.WriteLine($"Long word: {word}"),
                 onCompleted: () => Console.WriteLine("Sequence completed.")
             );
 
