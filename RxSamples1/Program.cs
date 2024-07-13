@@ -7,16 +7,10 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var market = new Subject<float>(); // observable
-            var marketConsumer = new Subject<float>(); // observer of 'market'
-                                                       // observable
+            var market = new ReplaySubject<float>();
 
-            market.Subscribe(marketConsumer);
-            market
-                .Inspect("market Consumer");
-
-            market.OnNext(1, 2, 3, 4);
-            market.OnCompleted();
+            market.OnNext(123);
+            market.Subscribe(x => Console.WriteLine($"Got the price {x}"));
         }
     }
 }
