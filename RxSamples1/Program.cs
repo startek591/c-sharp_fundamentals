@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace RxSamples
 {
     class Program
     {
-        static void Main()
+        static async Task Main(string[] args)
         {
-            var source1 = Observable.Interval(TimeSpan.FromSeconds(1)).Take(3);
-            var source2 = Observable.Interval(TimeSpan.FromSeconds(0.5)).Take(4);
+            // Create an observable that emits values every second
+            var source = Observable.Interval(TimeSpan.FromSeconds(1));
 
-            var concatenated = source1.Concat(source2);
+            // Delay each emitted value by 3 seconds
+            var delayed = source.Delay(TimeSpan.FromSeconds(3));
 
-            concatenated.Subscribe(
-                value => Console.WriteLine($"Concatenated value: {value}"),
-                () => Console.WriteLine("Concatenated completed")
-            );
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
+            // Subscribe to the delayed observable
+            delayed.Subscribe(
+                value => Console.WriteLine($"Delayed value: {value}"),
+                ex => Console.WriteLine($"Error: {ex.Message}"),
+                () => Console.WriteLine("Completed"));
+
+            await Task.Delay(TimeSpan.FromSeconds(10));
         }
     }
 }
