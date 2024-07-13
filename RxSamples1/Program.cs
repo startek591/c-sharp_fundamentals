@@ -7,23 +7,17 @@ namespace RxSamples
     {
         static void Main()
         {
-            var source = Observable.Defer(() =>
-        {
-            Console.WriteLine("Executing...");
-            if (DateTime.Now.Second % 3 != 0)
-                throw new Exception("Failed");
-            return Observable.Return(DateTime.Now);
-        });
+            var numbers = new[] { 1, 2, 0, 4, 5 };
 
-            var query = source.Retry(3); // Retry 3 times
+            var query = numbers.ToObservable()
+                .Select(x => 10 / x)
+                .OnErrorResumeNext(Observable.Return(-1)); // Fallback to -1 on error
 
             query.Subscribe(
-                result => Console.WriteLine($"Received: {result}"),
-                ex => Console.WriteLine($"Error: {ex.Message}"),
-                () => Console.WriteLine("Completed")
+                result => Console.WriteLine($"Result: {result}"),
+                ex => Console.WriteLine($"Sequence faulted: {ex.Message}"),
+                () => Console.WriteLine("Sequence completed")
             );
-
-            Console.ReadKey();
         }
     }
 }
