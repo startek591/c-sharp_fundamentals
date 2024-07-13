@@ -7,22 +7,23 @@ namespace RxSamples
     {
         static void Main()
         {
-            // Create a sequence of integers
-            var numbers = new[] { 1, 2, 0, 4, 5 };
+            var source = Observable.Defer(() =>
+        {
+            Console.WriteLine("Executing...");
+            if (DateTime.Now.Second % 3 != 0)
+                throw new Exception("Failed");
+            return Observable.Return(DateTime.Now);
+        });
 
-            var query = numbers.ToObservable()
-                .Select(x => 10 / x)
-                .Catch<int, DivideByZeroException>(ex =>
-                {
-                    Console.WriteLine($"Caught exception: {ex.Message}");
-                    return Observable.Empty<int>(); // Return an empty sequence as fallback
-                });
+            var query = source.Retry(3); // Retry 3 times
 
             query.Subscribe(
-                result => Console.WriteLine($"Result: {result}"),
-                ex => Console.WriteLine($"Sequence faulted: {ex.Message}"),
-                () => Console.WriteLine("Sequence completed")
+                result => Console.WriteLine($"Received: {result}"),
+                ex => Console.WriteLine($"Error: {ex.Message}"),
+                () => Console.WriteLine("Completed")
             );
+
+            Console.ReadKey();
         }
     }
 }
