@@ -8,30 +8,28 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var button = new Button();
-            var clickObservable = Observable.FromEventPattern<EventHandler, EventArgs>(
-             handler => button.Click += handler,
-             handler => button.Click -= handler
-            );
+            var customObservable = Observable.Create<int>(observer =>
+            {
+                try
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        observer.OnNext(i);
+                    }
+                    observer.OnCompleted();
+                }
+                catch (Exception ex)
+                {
+                    observer.OnError(ex);
+                }
+                return () => Console.WriteLine("Observer has unsubscribed");
+            });
 
-            clickObservable.Subscribe(
-                evt => Console.WriteLine("Button clicked"),
+            customObservable.Subscribe(
+                value => Console.WriteLine($"Received value: {value}"),
                 ex => Console.WriteLine($"Error: {ex.Message}"),
                 () => Console.WriteLine("Completed")
             );
-
-            // Simulate button click
-            button.OnClick();
-        }
-    }
-
-    class Button
-    {
-        public event EventHandler Click;
-
-        public void OnClick()
-        {
-            Click?.Invoke(this, EventArgs.Empty);
         }
     }
 }
