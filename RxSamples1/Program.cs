@@ -1,35 +1,23 @@
 ﻿using System;
-using System.Reactive;
-using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
+using System.Threading.Tasks;
 
 namespace RxSamples
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main()
         {
-            var customObservable = Observable.Create<int>(observer =>
-            {
-                try
-                {
-                    for (int i = 0; i < 5; i++)
-                    {
-                        observer.OnNext(i);
-                    }
-                    observer.OnCompleted();
-                }
-                catch (Exception ex)
-                {
-                    observer.OnError(ex);
-                }
-                return () => Console.WriteLine("Observer has unsubscribed");
-            });
+            var task = Task.Run(() => 42);
+            var taskObservable = task.ToObservable();
 
-            customObservable.Subscribe(
+            taskObservable.Subscribe(
                 value => Console.WriteLine($"Received value: {value}"),
                 ex => Console.WriteLine($"Error: {ex.Message}"),
                 () => Console.WriteLine("Completed")
             );
+
+            await task; // Wait for task completion to keep the console open
         }
     }
 }
