@@ -8,19 +8,19 @@ namespace RxSamples
     {
         static async Task Main(string[] args)
         {
-            // Create an observable that emits values every 300 milliseconds
-            var source = Observable.Interval(TimeSpan.FromMilliseconds(300));
+            // Create an observable that emits values every 500 milliseconds
+            var source = Observable.Interval(TimeSpan.FromMilliseconds(500));
 
-            // Throttle the emissions to one every second
-            var throttled = source.Throttle(TimeSpan.FromSeconds(1));
+            // Timeout each emission if no new value is emitted within 1 second
+            var timedOut = source.Timeout(TimeSpan.FromSeconds(1));
 
-            // Subscribe to the throttled observable
-            throttled.Subscribe(
-                value => Console.WriteLine($"Throttled value: {value}"),
-                ex => Console.WriteLine($"Error: {ex.Message}"),
+            // Subscribe to the timed out observable
+            timedOut.Subscribe(
+                value => Console.WriteLine($"Timed out value: {value}"),
+                ex => Console.WriteLine($"Timeout Error: {ex.Message}"),
                 () => Console.WriteLine("Completed"));
 
-            await Task.Delay(TimeSpan.FromSeconds(10)); // Keep the program running
+            await Task.Delay(TimeSpan.FromSeconds(10)); //  Keep the program running
         }
     }
 }
