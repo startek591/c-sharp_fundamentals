@@ -7,12 +7,19 @@ namespace RxSamples
     {
         static void Main()
         {
-            var numbers1 = Observable.Range(1, 3);
-            var numbers2 = Observable.Range(4, 3);
+            // Create a sequence of integers
+            var numbers = Observable.Range(1, 5);
 
-            numbers1
-                .Zip(numbers2, (x, y) => $"Combined: {x} + {y} = {x + y}") // Combine with addition
-                .Subscribe(result => Console.WriteLine(result));
+            // Aggregate the sequence into a single sum
+            var sum = numbers.Aggregate((acc, x) => acc + x);
+
+            // Subscribe to the sum result
+            sum.Subscribe(result =>
+            {
+                Console.WriteLine($"Sum: {result}");
+            });
+
+            Console.ReadLine(); // Keep console open
         }
     }
 }
