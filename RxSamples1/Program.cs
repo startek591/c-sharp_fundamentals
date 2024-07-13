@@ -10,8 +10,8 @@ namespace RxSamples
             var numbers = Observable.Range(1, 5);
 
             numbers
-             .Select(x => x * 10) // Transform each number
-             .Subscribe(x => Console.WriteLine($"Transformed: {x}"));
+            .Where(x => x % 2 == 0) // Filter even numbers
+            .Subscribe(x => Console.WriteLine($"Even Number: {x}"));
         }
     }
 }
