@@ -10,13 +10,12 @@ namespace RxSamples
             var source1 = Observable.Interval(TimeSpan.FromSeconds(1)).Take(3);
             var source2 = Observable.Interval(TimeSpan.FromSeconds(0.5)).Take(4);
 
-            var merged = source1.Merge(source2);
+            var concatenated = source1.Concat(source2);
 
-            merged.Subscribe(
-                value => Console.WriteLine($"Merged value: {value}"),
-                () => Console.WriteLine("Merged completed")
+            concatenated.Subscribe(
+                value => Console.WriteLine($"Concatenated value: {value}"),
+                () => Console.WriteLine("Concatenated completed")
             );
-
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
