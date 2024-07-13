@@ -10,11 +10,11 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var singleValue = 42;
-            var singleValueObservable = Observable.Return(singleValue);
+            var numbers = new List<int> { 1, 2, 3, 4, 5 };
+            var numbersObservable = numbers.ToObservable();
 
-            singleValueObservable.Subscribe(
-                value => Console.WriteLine($"Recieved value: {value}"),
+            numbersObservable.Subscribe(
+                number => Console.WriteLine($"Recieved value: {number}"),
                 ex => Console.WriteLine($"Error: {ex.Message}"),
                 () => Console.WriteLine("Completed")
             );
