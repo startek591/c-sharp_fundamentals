@@ -7,12 +7,11 @@ namespace RxSamples
     {
         static void Main()
         {
-            var words = new[] { "apple", "banana", "cherry", "date", "fig", "grape" };
-            var observableWords = words.ToObservable();
-            var longWords = observableWords.Where(word => word.Length > 4);
+            var interval = Observable.Interval(TimeSpan.FromSeconds(1));
+            var filteredInterval = interval.Where(i => i % 2 == 0);
 
-            longWords.Subscribe(
-                onNext: word => Console.WriteLine($"Long word: {word}"),
+            filteredInterval.Subscribe(
+                onNext: i => Console.WriteLine($"Even interval: {i}"),
                 onCompleted: () => Console.WriteLine("Sequence completed.")
             );
 
