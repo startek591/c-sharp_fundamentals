@@ -7,19 +7,16 @@ namespace RxSamples
     {
         static void Main(string[] args)
         {
-            var sensor = new Subject<float>();
-            using (sensor.Subscribe(Console.WriteLine))
-            {
-                // Anything outside of this block is unsubscribe
-                // automatically
-                sensor.OnNext(1);
-                sensor.OnNext(2);
-                sensor.OnNext(3);
-            }
-            // This value will not print
-            sensor.OnNext(4);
-            // Unsubscribing
-            sensor.Dispose();
+            var market = new Subject<float>(); // observable
+            var marketConsumer = new Subject<float>(); // observer of 'market'
+                                                       // observable
+
+            market.Subscribe(marketConsumer);
+            market
+                .Inspect("market Consumer");
+
+            market.OnNext(1, 2, 3, 4);
+            market.OnCompleted();
         }
     }
 }
