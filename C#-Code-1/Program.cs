@@ -150,6 +150,43 @@ namespace HelloWorld
 
             // Replace a string with another 
             Console.WriteLine("Replace String : {0}", randString.Replace("string", "sentence"));
+
+            // Compare strings and ignore case
+            // < 0: str1 preceeds str2
+            // = : Zero
+            // > 0 : str2 preceeds str1
+            Console.WriteLine("Compare A to B: {0}", String.Compare("A", "B", StringComparison.OrdinalIgnoreCase));
+
+            // Check if strings are equal
+            Console.WriteLine("A = a : {0}", string.Equals("A", "a", StringComparison.OrdinalIgnoreCase));
+
+            // Add padding left
+            Console.WriteLine("Pad Left : {0}", randString.PadLeft(20, '.'));
+
+            // Add padding right
+            Console.WriteLine("Padd Right : {0} Stuff", randString.PadRight(20, '.'));
+
+            // Trim whitespace
+            Console.WriteLine("Trim : {0}", randString.Trim());
+
+            // Make uppercase
+            Console.WriteLine("Uppercase : {0}", randString.ToUpper());
+
+            // Make lowercase
+            Console.WriteLine("Lowercase : {0}", randString.ToLower());
+
+            // Use Format to create strings
+            string newString = string.Format("{0} saw a {1} {2} in the {3}", "Paul", "rabbit", "eating", "field");
+
+            // You can add newlines with \n and join strings with +
+            Console.Write(newString + "\n");
+
+            // Other escape characters
+            // \' \" \\ \t \a
+
+            // Verbatim strings ignore escape characters
+            Console.WriteLine(@"Exactly What I Typed\n");
+
         }
     }
 }
