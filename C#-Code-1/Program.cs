@@ -338,6 +338,40 @@ namespace HelloWorld
             // Assigns that 1st value if true and otherwise
             // the 2nd
             bool canDrive = age > 16 ? true : false;
+
+            // Switch is used when you have limited options
+            // The only way to use range is to stack
+            // the possible values
+            switch (age)
+            {
+                case 1:
+                case 2:
+                    Console.WriteLine("Go to Day Care");
+                    break;
+                case 3:
+                case 4:
+                    Console.WriteLine("Go to Preschool");
+                    break;
+                case 5:
+                    Console.WriteLine("Go to Kindergraten");
+                    break;
+                default:
+                    Console.WriteLine("Go to another school");
+                    // You can also jump out of a switch
+                    // with goto
+                    goto OtherSchool;
+            }
+        OtherSchool:
+            Console.WriteLine("Elementary, Middle, High School");
+
+            // To compare string use Equals
+            string name2 = "Derek";
+            string name3 = "Derek";
+
+            if (name2.Equals(name3, StringComparison.Ordinal))
+            {
+                Console.WriteLine("Names are Equal");
+            }
         }
     }
 }
