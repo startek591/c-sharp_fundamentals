@@ -46,6 +46,16 @@ namespace HelloWorld
             Console.WriteLine("Hello {0}", name);
         }
 
+        // If you assign a value then it is optional to
+        // pass
+        static double GetSum(double x = 1, double y = 1)
+        {
+            double temp = x;
+            x = y;
+            y = temp;
+            return x + y;
+        }
+
         // Execution begins in the main function
         // static means this function can run without
         // creating an object
@@ -554,6 +564,16 @@ namespace HelloWorld
             // protected : Can be accessed by class and derived classes
 
             SayHello();
+
+            // ---- PASSING BY VALUE
+            // By default values are passed into a method
+            // and not a reference to the variable passed
+            // Changes made to those values do not effect the
+            // variables outside of the method
+            double x = 5;
+            double y = 4;
+
+            Console.WriteLine("5 + 4 = {0}", GetSum(x, y));
         }
     }
 }
