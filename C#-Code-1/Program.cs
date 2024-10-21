@@ -372,6 +372,36 @@ namespace HelloWorld
             {
                 Console.WriteLine("Names are Equal");
             }
+
+            // ---- WHILE LOOP
+            // You use the while loop when you want to execute
+            // as long as a condition is true
+
+            // This while loop will print odd numbers between
+            // 1 and 10
+            int i = 1;
+            while (i <= 10)
+            {
+                // % (Modulus) returns the remainder of a 
+                // division. If it returns 0 that means the
+                // value is even
+                if ((i % 2 == 0))
+                {
+                    i++;
+
+                    // Continue skips the rest of the code and 
+                    // starts execution back at the top of the 
+                    // while
+
+                    continue;
+                }
+
+                // Breaks jumps completely out of the loop
+                if (i == 9) break;
+
+                Console.WriteLine(i);
+                i++;
+            }
         }
     }
 }
