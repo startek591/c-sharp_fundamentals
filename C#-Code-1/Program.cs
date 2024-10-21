@@ -32,6 +32,20 @@ namespace HelloWorld
             return x / y;
         }
 
+        private static void SayHello()
+        {
+            // Defines a variable that will store a string
+            // of characters
+            string name = "";
+
+            Console.Write("What is your name : ");
+
+            // Save the input the user provides
+            name = Console.ReadLine();
+
+            Console.WriteLine("Hello {0}", name);
+        }
+
         // Execution begins in the main function
         // static means this function can run without
         // creating an object
@@ -526,6 +540,20 @@ namespace HelloWorld
 
             Console.WriteLine("Insert : {0}", sb2.ToString());
 
+            // ---- FUNCTIONS / METHODS
+            // Functions are used to avoid code duplication, provides
+            // organization and allows use to simulate different
+            // systems
+            // <Access Specifier> <Return Type> <Method Name>(Parameters)
+            // { <Body> }
+
+            // Access Specifier determines whether the function can
+            // be called from another class
+            // public : Can be accessed from another class
+            // private : Can't be accessed from another class
+            // protected : Can be accessed by class and derived classes
+
+            SayHello();
         }
     }
 }
