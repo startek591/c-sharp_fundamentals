@@ -333,6 +333,11 @@ namespace HelloWorld
             }
 
             Console.WriteLine("! true = " + (!true));
+
+            // Ternary Operator
+            // Assigns that 1st value if true and otherwise
+            // the 2nd
+            bool canDrive = age > 16 ? true : false;
         }
     }
 }
