@@ -74,6 +74,25 @@ namespace HelloWorld
             num4 = temp;
         }
 
+        // ---- PARAMS
+        // The params array must be the last parameter
+        // in the list
+        static double GetSumMore(params double[] nums)
+        {
+            double sum = 0;
+            foreach (int i in nums)
+            {
+                sum += i;
+            }
+            return sum;
+        }
+
+        // ---- NAMED PARAMETERS
+        static void PrintInfo(string name, int zipCode)
+        {
+            Console.WriteLine("{0} lives in the zip code {1}", name, zipCode);
+        }
+
 
         // Execution begins in the main function
         // static means this function can run without
@@ -621,6 +640,17 @@ namespace HelloWorld
 
             Console.WriteLine("After Swap num1 : {0} num2 : {1}", num3, num4);
 
+            // ---- PARAMS ---
+            // You are able to pass a variable amount
+            // of data of the same data type into a 
+            // method using params. You can also pass
+            // in an array.
+            Console.WriteLine("1 + 2 + 3 = {0}", GetSumMore(1, 2, 3));
+
+            // ---- NAMED PARAMETERS 
+            // You can pass values in any order if
+            // you used named parameters
+            PrintInfo(zipCode: 151417, name: "Derek Banas");
         }
     }
 }
