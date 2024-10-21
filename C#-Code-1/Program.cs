@@ -93,6 +93,19 @@ namespace HelloWorld
             Console.WriteLine("{0} lives in the zip code {1}", name, zipCode);
         }
 
+        // ---- METHOD OVERLOADING
+        static double GetSum2(double x = 1, double y = 1)
+        {
+            return x + y;
+        }
+
+        static double GetSum2(string x = "1", string y = "1")
+        {
+            double dblX = Convert.ToDouble(x);
+            double dblY = Convert.ToDouble(y);
+            return dblX + dblY;
+        }
+
 
         // Execution begins in the main function
         // static means this function can run without
@@ -651,6 +664,16 @@ namespace HelloWorld
             // You can pass values in any order if
             // you used named parameters
             PrintInfo(zipCode: 151417, name: "Derek Banas");
+
+            // ---- METHOD OVERLOADING
+            // You can define methods with the same
+            // name that will be called depending on
+            // what data is sent automatically
+            Console.WriteLine("5.0 + 4.0 = {0}", GetSum2(5.0, 4.5));
+
+            Console.WriteLine("5 + 4 = {0}", GetSum2(5, 4));
+
+            Console.WriteLine("5 + 4 = {0}", GetSum2("5", "4"));
         }
     }
 }
