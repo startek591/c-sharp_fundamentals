@@ -106,6 +106,30 @@ namespace HelloWorld
             return dblX + dblY;
         }
 
+        static void PaintCar(CarColor cc)
+        {
+            Console.WriteLine("The car was painted {0} with the code {1}", cc, (int)cc);
+        }
+
+        // ---- END OF FUNCTIONS
+
+        // ---- ENUMS
+        // An enum is a custom data type with
+        // key value pairs. They allow you to 
+        // use symbolic names to represent data
+        // The first number is 0 default unless
+        // you change it
+        // you can define the underlying type
+        // or leave it as int as default
+
+        enum CarColor : byte
+        {
+            Orange = 1,
+            Blue,
+            Green,
+            Red,
+            Yellow
+        }
 
         // Execution begins in the main function
         // static means this function can run without
@@ -674,6 +698,35 @@ namespace HelloWorld
             Console.WriteLine("5 + 4 = {0}", GetSum2(5, 4));
 
             Console.WriteLine("5 + 4 = {0}", GetSum2("5", "4"));
+
+            // ---- DATETIME & TIMESPAN
+            DateTime awesomeDate = new DateTime(1974, 12, 21);
+            Console.WriteLine("Day of Week : {0}", awesomeDate.DayOfWeek);
+
+            // You can changes values
+            awesomeDate = awesomeDate.AddDays(4);
+            awesomeDate = awesomeDate.AddMonths(1);
+            awesomeDate = awesomeDate.AddYears(1);
+            Console.WriteLine("New Date : {0}", awesomeDate.Date);
+
+            // TimeSpan
+            // Used to define a time
+            TimeSpan lunchTime = new TimeSpan(12, 30, 0);
+
+            // Change values
+            lunchTime = lunchTime.Subtract(new TimeSpan(0, 15, 0));
+            lunchTime = lunchTime.Add(new TimeSpan(1, 0, 0));
+            Console.WriteLine("New Time : {0}", lunchTime.ToString());
+
+            // ---- ENUM
+            CarColor car1 = CarColor.Blue;
+            PaintCar(car1);
+
+            // Waits for input from the user if you run the
+            // ConsoleApp1.exe instead of instantly closing
+            // The executable is in bin/Debug/net6.0
+            Console.Read();
+
         }
     }
 }
