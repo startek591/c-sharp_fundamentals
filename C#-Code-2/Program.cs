@@ -50,6 +50,28 @@ namespace ConsoleApp2
             // You can also create static utility
             // classes Project -> Class
             Console.WriteLine("Area of Rectangle : {0}", ShapeMath.GetArea("rectangle", 5, 6));
+
+            // ---- NULLABLE TYPES
+            // Data types by default cannot have a 
+            // value of null. Often null is needed
+            // when you are working with databases
+            // and you can create a null type by
+            // adding a ? to the definition
+            int? randNum = null;
+
+            // Check for null
+            if (randNum == null)
+            {
+                Console.WriteLine("randNum is null");
+            }
+
+            // Another check for null
+            if (!randNum.HasValue)
+            {
+                Console.WriteLine("randNum is null");
+            }
+
+            Console.ReadLine();
         }
         // ---- STRUCTS 
         // A struct is a user defined type that 
