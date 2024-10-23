@@ -46,6 +46,10 @@ namespace ConsoleApp2
             };
 
             Console.WriteLine("# of Animal {0}", Animal.GetNumAnimals());
+
+            // You can also create static utility
+            // classes Project -> Class
+            Console.WriteLine("Area of Rectangle : {0}", ShapeMath.GetArea("rectangle", 5, 6));
         }
         // ---- STRUCTS 
         // A struct is a user defined type that 
