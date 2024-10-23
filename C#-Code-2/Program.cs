@@ -18,6 +18,14 @@ namespace ConsoleApp2
             // Use a constructor to create a Reactangle
             Reactangle rect2 = new Reactangle(100, 40);
 
+            // If you assign one Rectangle to another
+            // you are setting the values and not
+            // creating a reference
+            rect2 = rect1;
+            rect1.length = 33;
+
+            Console.WriteLine("rect2.length : {0}", rect2.length);
+
         }
         // ---- STRUCTS 
         // A struct is a user defined type that 
